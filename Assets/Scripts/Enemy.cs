@@ -16,7 +16,6 @@ public class Enemy : Entity
     private GameObject player;
     private Rigidbody2D playerRb;
     private Rigidbody2D rb;
-    private Animator animator;
 
     private Vector2 home;
 
@@ -29,8 +28,6 @@ public class Enemy : Entity
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
         playerRb = player.GetComponent<Rigidbody2D>();
-
-        animator = GetComponent<Animator>();
 
         home = rb.position;
     }
@@ -53,7 +50,7 @@ public class Enemy : Entity
         }
         else if (d <= attackRadius)
         {
-
+            StartCoroutine(AttackCo());
         }
         else
         {
@@ -78,8 +75,11 @@ public class Enemy : Entity
         }
     }
 
-    protected void Move (float dX, float dY)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        rb.position += new Vector2(dX, dY);
+        if (other.CompareTag("Hitbox"))
+        {
+
+        }
     }
 }
